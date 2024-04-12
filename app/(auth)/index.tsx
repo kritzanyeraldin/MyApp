@@ -1,44 +1,53 @@
+import { Link } from "expo-router";
 import { useState } from "react";
-import { Button, Input, Text, View, XStack, YGroup, YStack } from "tamagui";
+
+import { Button, H2, Input, Text, View, XStack } from "tamagui";
 
 export default function SignInScreen() {
   const [password, setPassword] = useState("");
+
+  const handlePasswordChange = (password: string) => setPassword(password);
+
   return (
     <View
       justifyContent="center"
       alignItems="center"
       width="100%"
       height="100%"
-      gap="$7"
-      backgroundColor="$blue1"
+      p="$4"
     >
-      <Text color="$blue10">¡Hola de nuevo!</Text>
-      <YStack gap="$4" width="60%" backgroundColor="$red1">
-        <YStack gap="$4" backgroundColor="$gray1">
+      <View width="100%" maxWidth={300} gap="$7">
+        <H2 color="$blue10" textAlign="center">
+          ¡Hola de nuevo!
+        </H2>
+        <View gap="$4">
           <Input
-            style={{ color: "red" }}
-            size="$3.5"
+            color="black"
             backgroundColor="$backgroundTransparent"
             placeholder="Ingresa tu correo electronico"
           />
-          <YStack gap="$1.5">
-            <Input
-              style={{ color: "red" }}
-              size="$3.5"
-              backgroundColor="$backgroundTransparent"
-              placeholder="Ingresa tu contraseña"
-              value={password}
-              onChangeText={(text) => setPassword(text)}
-            />
-            <XStack justifyContent="flex-end">
-              <Text color="$blue10">olvidaste tu contraseña</Text>
-            </XStack>
-          </YStack>
-        </YStack>
-
-        <Button>Continue</Button>
-      </YStack>
-      <Text color="$blue10">No tienes una cuenta Registrate</Text>
+          <Input
+            color="black"
+            backgroundColor="$backgroundTransparent"
+            placeholder="Ingresa tu contraseña"
+            value={password}
+            onChangeText={handlePasswordChange}
+          />
+          <Link
+            href="/fogortPassword"
+            style={{ color: "blue", textAlign: "right", marginTop: -10 }}
+          >
+            Olvidaste tu contraseña
+          </Link>
+          <Button mt="$4">Continue</Button>
+        </View>
+        <Text color="$blue10" textAlign="right">
+          No tienes una cuenta.
+          <Link href="/signUp" style={{ color: "blue" }}>
+            Regístrate
+          </Link>
+        </Text>
+      </View>
     </View>
   );
 }
