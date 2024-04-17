@@ -6,9 +6,12 @@ export default function AuthLayout() {
   return (
     <Drawer
       drawerContent={DrawerContent}
-      screenOptions={{
-        headerRight: UserAvatar,
-      }}
+      screenOptions={
+        {
+          // headerRight: UserAvatar,
+          // drawerContentStyle: { height: "100%" },
+        }
+      }
     >
       {drawerSections.map((section) =>
         section.items.map((item) => <Drawer.Screen {...item.screenProps} />)

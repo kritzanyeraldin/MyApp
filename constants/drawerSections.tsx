@@ -1,6 +1,12 @@
-import { UserAvatar } from "@/components/home";
+import UserAvatar from "@/components/home/UserAvatar";
 import { DrawerItem, DrawerNavigationOptions } from "@react-navigation/drawer";
-import { Moon } from "@tamagui/lucide-icons";
+import {
+  CalendarHeart,
+  Home,
+  Moon,
+  Settings,
+  Utensils,
+} from "@tamagui/lucide-icons";
 import { ScreenProps } from "expo-router/build/useScreens";
 
 type DrawerItemProps = React.ComponentProps<typeof DrawerItem>;
@@ -17,7 +23,7 @@ type DrawerSection = {
   items: DrawerSectionItem[];
 };
 
-export const drawerSections: DrawerSection[] = [
+const drawerSections: DrawerSection[] = [
   {
     id: "general",
     label: "General",
@@ -25,9 +31,7 @@ export const drawerSections: DrawerSection[] = [
       {
         id: "menu",
         props: {
-          icon: ({ focused }) => (
-            <Moon color={focused ? "$red10Dark" : "$blue10Dark"} />
-          ),
+          icon: ({ focused }) => <Home color={focused ? "red" : "black"} />,
         },
         screenProps: {
           name: "index",
@@ -37,12 +41,11 @@ export const drawerSections: DrawerSection[] = [
           },
         },
       },
+
       {
         id: "reserve",
         props: {
-          icon: ({ focused }) => (
-            <Moon color={focused ? "$red10Dark" : "$blue10Dark"} />
-          ),
+          icon: ({ focused }) => <Utensils color={focused ? "red" : "black"} />,
         },
         screenProps: {
           name: "reserve",
@@ -53,11 +56,45 @@ export const drawerSections: DrawerSection[] = [
           },
         },
       },
+
+      {
+        id: "My reservations",
+        props: {
+          icon: ({ focused }) => (
+            <CalendarHeart color={focused ? "red" : "black"} />
+          ),
+        },
+        screenProps: {
+          name: "myReservations",
+          options: {
+            drawerLabel: "Mis Reservaciones",
+            title: "Mis Reservaciones",
+            headerRight: UserAvatar,
+          },
+        },
+      },
     ],
   },
   {
     id: "settings",
     label: "Configuración",
-    items: [],
+    items: [
+      {
+        id: "settings",
+        props: {
+          icon: ({ focused }) => <Settings color={focused ? "red" : "black"} />,
+        },
+        screenProps: {
+          name: "settings",
+          options: {
+            drawerLabel: "Ajustes",
+            title: "Ajustes",
+            headerRight: UserAvatar,
+          },
+        },
+      },
+    ],
   },
 ];
+
+export default drawerSections;
