@@ -1,5 +1,6 @@
 import { DrawerContent, UserAvatar } from "@/components/home";
 import { drawerSections } from "@/constants";
+import { Tabs } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 
 export default function AuthLayout() {
