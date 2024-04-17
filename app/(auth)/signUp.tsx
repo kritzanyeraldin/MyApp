@@ -23,7 +23,7 @@ export default function SinUpScreen() {
       height="100%"
       // backgroundColor="red"
     >
-      <View width="100%" maxWidth={310} gap="$8">
+      <View width="100%" maxWidth={310} gap="$7">
         <H1 color="$blue10" textAlign="center">
           Registrate
         </H1>
@@ -49,7 +49,7 @@ export default function SinUpScreen() {
           >
             {/* <Button>asd</Button> */}
           </Input>
-          <Button icon={Album}>Continuar</Button>
+          <Button>Continuar</Button>
         </View>
       </View>
     </View>
