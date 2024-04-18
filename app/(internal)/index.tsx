@@ -1,3 +1,5 @@
+import { menuCard } from "@/constants";
+import { router } from "expo-router";
 import { Fragment } from "react";
 import {
   Button,
@@ -16,83 +18,24 @@ import {
 } from "tamagui";
 
 export default function ForYouScreen() {
-  const menu = [
-    {
-      id: "desayuno",
-      title: "Desayuno",
-      image: "https://picsum.photos/200/300",
-      content: [
-        {
-          item1: "leche con cafe",
-          item2: "pan con huevo",
-          item3: "fruta",
-        },
-      ],
-    },
-    {
-      id: "almuerzo",
-      title: "Almuerzo",
-      image: "https://picsum.photos/200/300",
-      content: [
-        {
-          item1: "leche con cafe",
-          item2: "pan con huevo",
-          item3: "fruta",
-        },
-      ],
-    },
-    {
-      id: "cena",
-      title: "Cena",
-      image: "https://picsum.photos/200/300",
-      content: [
-        {
-          item1: "leche con cafe",
-          item2: "pan con huevo",
-          item3: "fruta",
-        },
-      ],
-    },
-
-    {
-      id: "ave",
-      title: "Ca",
-      image: "https://picsum.photos/200/300",
-      content: [
-        {
-          item1: "leche con cafe",
-          item2: "pan con huevo",
-          item3: "fruta",
-        },
-      ],
-    },
-
-    {
-      id: "na",
-      title: "ad",
-      image: "https://picsum.photos/200/300",
-      content: [
-        {
-          item1: "leche con cafe",
-          item2: "pan con huevo",
-          item3: "fruta",
-        },
-      ],
-    },
-  ];
-
   return (
     <View gap="$4">
-      <View>
+      <XStack>
         <Button bg="yellow">
           <YStack>
             <Text color="$blue10Dark">monday</Text>
             <Text color="$blue10Dark">13</Text>
           </YStack>
         </Button>
-      </View>
+        <Button bg="yellow">
+          <YStack>
+            <Text color="$blue10Dark">monday</Text>
+            <Text color="$blue10Dark">13</Text>
+          </YStack>
+        </Button>
+      </XStack>
       <ScrollView
-        maxHeight="70%"
+        // maxHeight="70%"
         // maxWidth={}
         width="100%"
         height="100%"
@@ -101,7 +44,7 @@ export default function ForYouScreen() {
         borderRadius="$4"
       >
         <View gap="$4">
-          {menu.map((menuName, menuIndex) => {
+          {menuCard.map((menuName) => {
             return (
               <Fragment key={menuName.id}>
                 <XStack bg="red" justifyContent="flex-start">
@@ -117,15 +60,17 @@ export default function ForYouScreen() {
                     <CardHeader>
                       <H3>{menuName.title}</H3>
                       {menuName.content.map((item) => (
-                        <>
-                          <Paragraph>{item.item1}</Paragraph>
-                          <Paragraph>{item.item2}</Paragraph>
-                          <Paragraph>{item.item3}</Paragraph>
-                        </>
+                        <Fragment key={item}>
+                          <Paragraph>{item}</Paragraph>
+                        </Fragment>
                       ))}
                     </CardHeader>
                     <CardFooter justifyContent="flex-end" p="$3">
-                      <Button> reservar</Button>
+                      <Button
+                        onPress={() => router.push("/(internal)/reserve")}
+                      >
+                        reservar
+                      </Button>
                     </CardFooter>
                   </Card>
                 </XStack>
