@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import {
   Button,
   Card,
@@ -6,6 +7,8 @@ import {
   H3,
   Image,
   Paragraph,
+  ScrollView,
+  Separator,
   Text,
   View,
   XStack,
@@ -13,6 +16,71 @@ import {
 } from "tamagui";
 
 export default function ForYouScreen() {
+  const menu = [
+    {
+      id: "desayuno",
+      title: "Desayuno",
+      image: "https://picsum.photos/200/300",
+      content: [
+        {
+          item1: "leche con cafe",
+          item2: "pan con huevo",
+          item3: "fruta",
+        },
+      ],
+    },
+    {
+      id: "almuerzo",
+      title: "Almuerzo",
+      image: "https://picsum.photos/200/300",
+      content: [
+        {
+          item1: "leche con cafe",
+          item2: "pan con huevo",
+          item3: "fruta",
+        },
+      ],
+    },
+    {
+      id: "cena",
+      title: "Cena",
+      image: "https://picsum.photos/200/300",
+      content: [
+        {
+          item1: "leche con cafe",
+          item2: "pan con huevo",
+          item3: "fruta",
+        },
+      ],
+    },
+
+    {
+      id: "ave",
+      title: "Ca",
+      image: "https://picsum.photos/200/300",
+      content: [
+        {
+          item1: "leche con cafe",
+          item2: "pan con huevo",
+          item3: "fruta",
+        },
+      ],
+    },
+
+    {
+      id: "na",
+      title: "ad",
+      image: "https://picsum.photos/200/300",
+      content: [
+        {
+          item1: "leche con cafe",
+          item2: "pan con huevo",
+          item3: "fruta",
+        },
+      ],
+    },
+  ];
+
   return (
     <View gap="$4">
       <View>
@@ -23,8 +91,51 @@ export default function ForYouScreen() {
           </YStack>
         </Button>
       </View>
+      <ScrollView
+        maxHeight="70%"
+        // maxWidth={}
+        width="100%"
+        height="100%"
+        backgroundColor="$blue10Dark"
+        padding="$4"
+        borderRadius="$4"
+      >
+        <View gap="$4">
+          {menu.map((menuName, menuIndex) => {
+            return (
+              <Fragment key={menuName.id}>
+                <XStack bg="red" justifyContent="flex-start">
+                  <Image
+                    style={{ width: "30%", height: "100%" }}
+                    source={{
+                      uri: menuName.image,
+                      // width: 120,
+                      // height: 150,
+                    }}
+                  />
+                  <Card bg="yellowgreen" width="70%" br="$0">
+                    <CardHeader>
+                      <H3>{menuName.title}</H3>
+                      {menuName.content.map((item) => (
+                        <>
+                          <Paragraph>{item.item1}</Paragraph>
+                          <Paragraph>{item.item2}</Paragraph>
+                          <Paragraph>{item.item3}</Paragraph>
+                        </>
+                      ))}
+                    </CardHeader>
+                    <CardFooter justifyContent="flex-end" p="$3">
+                      <Button> reservar</Button>
+                    </CardFooter>
+                  </Card>
+                </XStack>
+              </Fragment>
+            );
+          })}
+        </View>
+      </ScrollView>
 
-      <XStack bg="red" justifyContent="flex-start">
+      {/* <XStack bg="red" justifyContent="flex-start">
         <Image
           style={{ width: "30%", height: "100%" }}
           source={{
@@ -44,7 +155,7 @@ export default function ForYouScreen() {
             <Button> reservar</Button>
           </CardFooter>
         </Card>
-      </XStack>
+      </XStack> */}
     </View>
   );
 }
