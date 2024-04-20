@@ -31,7 +31,9 @@ const ReserveScreen = () => {
 
   return (
     <TabView
-      style={{ padding: 5, backgroundColor: "white" }}
+      // overScrollMode={"never"}
+      swipeEnabled={false}
+      style={{ backgroundColor: "blue" }}
       navigationState={{ index, routes }}
       renderScene={renderScene}
       onIndexChange={setIndex}
@@ -43,6 +45,7 @@ const ReserveScreen = () => {
             width: "50%",
             alignSelf: "center",
             backgroundColor: "white",
+            marginTop: 5,
           }}
           renderLabel={(props) => (
             <Text color="black" fontSize="$5">
