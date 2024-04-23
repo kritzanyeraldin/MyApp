@@ -5,6 +5,8 @@ import {
   ButtonProps,
   Card,
   Circle,
+  H1,
+  H2,
   Paragraph,
   Text,
   View,
@@ -33,45 +35,59 @@ const Carousel = ({ data }: CarouselProps) => {
   const carWidth = width - 2 * SPANCING;
 
   return (
-    <View mt="$3" bg="green" w="100%">
+    <View bg="white" w="100%">
       <FlatList
         data={data}
         horizontal
         showsHorizontalScrollIndicator={false}
         pagingEnabled
-        contentContainerStyle={{ backgroundColor: "yellow", gap: 16 }}
+        contentContainerStyle={{
+          backgroundColor: "#d0d0d0",
+          gap: 16,
+          paddingRight: carWidth / 2,
+        }}
         snapToAlignment="start"
         decelerationRate="fast"
         onViewableItemsChanged={({ viewableItems }) => {
           setCurrentMenuItemId(viewableItems[0].key);
         }}
         renderItem={({ item, index }) => (
-          <Card
-            key={item.id}
-            w={carWidth - 60}
-            mr={index === data.length - 1 ? 60 : 0}
-            br={0}
-            h={200}
-          >
-            <Card.Header>
-              <Text>{item.title}</Text>
+          <Card key={item.id} w={carWidth - 60} br={0} h={200}>
+            <Card.Header h="50%">
+              <H2>{item.title}</H2>
               <Paragraph>Disfruta de un rico {item.title}</Paragraph>
             </Card.Header>
-            <Card.Footer>
-              <Button onPress={item.action.onPress}>{item.action.label}</Button>
+            <Card.Footer
+              justifyContent="center"
+              w="100%"
+              h="50%"
+              alignContent="center"
+            >
+              <Button
+                color="#5E5C5C"
+                br="$0"
+                borderColor="#d0d0d0"
+                variant="outlined"
+                mt="$5"
+                width="90%"
+                onPress={item.action.onPress}
+              >
+                {item.action.label}
+              </Button>
             </Card.Footer>
           </Card>
         )}
       ></FlatList>
-      <XStack justifyContent="center" gap="$1.5" mt="$2">
+      <XStack justifyContent="center" mt="$4">
         {data.map((item) => {
           return (
             <Circle
               key={item.id}
-              size={15}
+              size={item.id === currentMenuItemId ? 13 : 10}
               bg={item.id === currentMenuItemId ? "black" : "white"}
               borderColor="black"
-              borderWidth="$1.5"
+              borderWidth="$1"
+              mr="$1.5"
             ></Circle>
           );
         })}

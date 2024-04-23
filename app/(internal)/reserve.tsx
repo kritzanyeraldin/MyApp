@@ -6,10 +6,9 @@ import {
   SceneMap,
   TabBar,
   TabBarIndicator,
-  TabBarItem,
   TabView,
 } from "react-native-tab-view";
-import { Label, Text, View } from "tamagui";
+import { Text } from "tamagui";
 
 const ReserveRoute = () => <ReserveTab />;
 
@@ -33,7 +32,7 @@ const ReserveScreen = () => {
     <TabView
       // overScrollMode={"never"}
       swipeEnabled={false}
-      style={{ backgroundColor: "blue" }}
+      style={{ backgroundColor: "white" }}
       navigationState={{ index, routes }}
       renderScene={renderScene}
       onIndexChange={setIndex}
@@ -42,7 +41,7 @@ const ReserveScreen = () => {
         <TabBar
           {...props}
           style={{
-            width: "50%",
+            width: "60%",
             alignSelf: "center",
             backgroundColor: "white",
             marginTop: 5,
@@ -55,7 +54,7 @@ const ReserveScreen = () => {
           renderIndicator={(props) => (
             <TabBarIndicator
               {...props}
-              style={{ backgroundColor: "black", height: "10%" }}
+              style={{ backgroundColor: "black", height: "8%" }}
             />
           )}
           // renderIcon={}
