@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FlatList } from "react-native";
 import {
   Button,
@@ -9,6 +9,7 @@ import {
   Text,
   View,
   XStack,
+  useWindowDimensions,
 } from "tamagui";
 
 export type TCarouselItem = {
@@ -27,13 +28,31 @@ type CarouselProps = {
 const SPANCING = 16;
 
 const Carousel = ({ data }: CarouselProps) => {
+  const { width } = useWindowDimensions();
+  const [currentMenuItemId, setCurrentMenuItemId] = useState<string>();
+  const carWidth = width - 2 * SPANCING;
+
   return (
-    <View mt="$3" bg="green">
+    <View mt="$3" bg="green" w="100%">
       <FlatList
         data={data}
         horizontal
-        renderItem={({ item }) => (
-          <Card key={item.id} br={0}>
+        showsHorizontalScrollIndicator={false}
+        pagingEnabled
+        contentContainerStyle={{ backgroundColor: "yellow", gap: 16 }}
+        snapToAlignment="start"
+        decelerationRate="fast"
+        onViewableItemsChanged={({ viewableItems }) => {
+          setCurrentMenuItemId(viewableItems[0].key);
+        }}
+        renderItem={({ item, index }) => (
+          <Card
+            key={item.id}
+            w={carWidth - 60}
+            mr={index === data.length - 1 ? 60 : 0}
+            br={0}
+            h={200}
+          >
             <Card.Header>
               <Text>{item.title}</Text>
               <Paragraph>Disfruta de un rico {item.title}</Paragraph>
@@ -50,7 +69,7 @@ const Carousel = ({ data }: CarouselProps) => {
             <Circle
               key={item.id}
               size={15}
-              bg="white"
+              bg={item.id === currentMenuItemId ? "black" : "white"}
               borderColor="black"
               borderWidth="$1.5"
             ></Circle>
