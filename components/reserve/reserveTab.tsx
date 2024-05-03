@@ -1,5 +1,7 @@
 import { View } from "tamagui";
 import Carousel from "./carousel";
+import ReserveMenu from "../../app/(internal)/reserve/reserveMenu";
+import { router, useNavigation, useRouter } from "expo-router";
 
 const menuData = [
   {
@@ -32,6 +34,7 @@ const lateMenuData = [
 ];
 
 export default function ReserveTab() {
+  const router = useRouter();
   return (
     <View bg="white" height="100%" justifyContent="space-around">
       <Carousel
@@ -39,9 +42,7 @@ export default function ReserveTab() {
           ...item,
           action: {
             label: "Reservar",
-            onPress: () => {
-              console.log(item);
-            },
+            onPress: () => router.push("/(internal)/reserve/reserveMenu"),
           },
         }))}
       ></Carousel>

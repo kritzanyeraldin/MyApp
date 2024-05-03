@@ -44,7 +44,7 @@ export default function SignInScreen() {
           <Button
             mt="$4"
             onPress={() => {
-              router.push("/(internal)");
+              router.push("/(internal)/");
             }}
           >
             Continuar

@@ -83,8 +83,13 @@ const Carousel = ({ data }: CarouselProps) => {
           return (
             <Circle
               key={item.id}
-              size={item.id === currentMenuItemId ? 13 : 10}
-              bg={item.id === currentMenuItemId ? "black" : "white"}
+              transform={[
+                {
+                  scale: item.id === currentMenuItemId ? 1.2 : 1,
+                },
+              ]}
+              size={10}
+              bg={item.id === currentMenuItemId ? "black" : "#ffffffd2"}
               borderColor="black"
               borderWidth="$1"
               mr="$1.5"

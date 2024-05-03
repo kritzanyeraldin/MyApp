@@ -1,14 +1,15 @@
+import React, { useState } from "react";
 import {
-  H5,
-  ScrollView,
-  Separator,
-  SizableText,
-  Tabs,
-  Text,
-  View,
-} from "tamagui";
-import Carousel from "./carousel";
-import Comp from "./comp";
+  SceneMap,
+  TabBar,
+  TabBarIndicator,
+  TabBarItem,
+  TabView,
+} from "react-native-tab-view";
+import ScheduleCard from "./scheduleCard";
+import { Text } from "tamagui";
+import { Icon } from "../common";
+import { icons } from "@/constants/icons";
 const breakfastSchedules = [
   {
     id: "Turno 1",
@@ -48,46 +49,108 @@ const breakfastSchedules = [
   },
 ];
 
-const SchedulesTab = () => {
-  return (
-    <View>
-      <Tabs
-        defaultValue="tab1"
-        orientation="horizontal"
-        flexDirection="column"
-        width="100%"
-        // height=
-        overflow="hidden"
-        bg="#b4b3b3"
-        mt="$3"
-        // br="$0"
-        // h={200}
-      >
-        <Tabs.List justifyContent="center" br={0}>
-          <Tabs.Tab value="Desayuno">
-            <SizableText>Tab 1</SizableText>
-          </Tabs.Tab>
-          <Tabs.Tab value="Almuerzo">
-            <SizableText>Tab 2</SizableText>
-          </Tabs.Tab>
-          <Tabs.Tab value="Cena">
-            <SizableText>Tab 3</SizableText>
-          </Tabs.Tab>
-        </Tabs.List>
+// const SchedulesTab = () => {
+//   return (
+//     <View>
+//       <Tabs
+//         defaultValue="Desayuno"
+//         orientation="horizontal"
+//         flexDirection="column"
+//         width="100%"
+//         // height=
+//         overflow="hidden"
+//         bg="#ffffff"
+//         mt="$3"
+//         // br="$0"
+//         // h={200}
+//       >
+//         <Tabs.List justifyContent="center" br={0}>
+//           <Tabs.Tab value="Desayuno">
+//             <SizableText>Desayuno</SizableText>
+//           </Tabs.Tab>
+//           <Tabs.Tab value="Almuerzo">
+//             <SizableText>Almuerzo</SizableText>
+//           </Tabs.Tab>
+//           <Tabs.Tab value="Cena">
+//             <SizableText>Cena</SizableText>
+//           </Tabs.Tab>
+//         </Tabs.List>
 
-        <Separator />
-        <Tabs.Content value="tab1" height="100%">
-          <ScrollView overflow="unset">
-            <Comp data={breakfastSchedules}></Comp>
-          </ScrollView>
-        </Tabs.Content>
-        <Tabs.Content value="tab2">
-          <View>
-            <Text>hoii</Text>
-          </View>
-        </Tabs.Content>
-      </Tabs>
-    </View>
+//         <Separator />
+//         {/* <Tabs.Content value="Desayuno" height="100%">
+//           <ScrollView>
+//             <Comp data={breakfastSchedules}></Comp>
+//           </ScrollView>
+//         </Tabs.Content>
+//         <Tabs.Content value="Almuerzo">
+//           <Comp data={breakfastSchedules}></Comp>
+//         </Tabs.Content>
+//         <Tabs.Content value="Cena">
+//           <Comp data={breakfastSchedules}></Comp>
+//         </Tabs.Content> */}
+//       </Tabs>
+//     </View>
+//   );
+// };
+const BreakfastRoute = () => <ScheduleCard data={breakfastSchedules} />;
+const LunchRoute = () => <ScheduleCard data={breakfastSchedules} />;
+const DinnerRoute = () => <ScheduleCard data={breakfastSchedules} />;
+
+const renderScene = SceneMap({
+  first: BreakfastRoute,
+  second: LunchRoute,
+  third: DinnerRoute,
+});
+
+type Route = {
+  key: string;
+  title: string;
+  icon: keyof typeof icons;
+};
+
+const SchedulesTab = () => {
+  const [index, setIndex] = useState(0);
+  const [routes] = useState<Route[]>([
+    { key: "first", title: "Desayuno", icon: "coffee" },
+    { key: "second", title: "Almuerzo", icon: "forkKnife" },
+    { key: "third", title: "Cena", icon: "bowlSteam" },
+  ]);
+  return (
+    <TabView
+      onIndexChange={setIndex}
+      // initialLayout=
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      tabBarPosition="bottom"
+      swipeEnabled={false}
+      renderTabBar={(props) => (
+        <TabBar
+          {...props}
+          pressColor="red"
+          style={{
+            backgroundColor: "white",
+          }}
+          renderIcon={(props) => (
+            <Icon type={props.route.icon} weight="regular" />
+          )}
+          renderTabBarItem={(props) => <TabBarItem {...props} />}
+          renderLabel={(props) => (
+            <Text fontSize="$4" color="black">
+              {props.route.title}
+            </Text>
+          )}
+          renderIndicator={(props) => (
+            <TabBarIndicator
+              {...props}
+              style={{
+                height: "100%",
+                backgroundColor: "#b7b7b7",
+              }}
+            />
+          )}
+        />
+      )}
+    ></TabView>
   );
 };
 

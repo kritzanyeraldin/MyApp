@@ -1,7 +1,8 @@
 import { Calendar } from "@tamagui/lucide-icons";
 import React from "react";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
-import { Card, Text, View, XStack, YStack } from "tamagui";
+import { red } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
+import { Card, ScrollView, Text, View, XStack, YStack } from "tamagui";
 
 export type TmenuItem = {
   id: string;
@@ -11,13 +12,13 @@ export type TmenuItem = {
   progress: number;
 };
 
-type CompProps = {
+type ScheduleCardProps = {
   data: TmenuItem[];
 };
 
-const Comp = ({ data }: CompProps) => {
+const ScheduleCard = ({ data }: ScheduleCardProps) => {
   return (
-    <View bg="#e09898" height="100%">
+    <ScrollView bg="#ffffff" height="100%">
       {data.map((item) => (
         <Card
           key={item.id}
@@ -25,9 +26,11 @@ const Comp = ({ data }: CompProps) => {
           maxWidth="90%"
           height="$13"
           alignSelf="center"
-          mt="$3"
+          mt="$4"
+          br="$0"
+          bg={item.progress === 100 ? "#969696e8" : "#e7e7e7ff"}
         >
-          <XStack justifyContent="center" flexGrow={1} bg="#dbdbdb">
+          <XStack justifyContent="center" flexGrow={1}>
             <YStack justifyContent="space-around" flexGrow={1} marginLeft="$4">
               <XStack gap="$1.5">
                 <Calendar size="$1" />
@@ -74,12 +77,13 @@ const Comp = ({ data }: CompProps) => {
                 backgroundColor="#888787"
                 tintColor="#1b1818aa"
               ></AnimatedCircularProgress>
+              <Text>{item.progress} </Text>
             </YStack>
           </XStack>
         </Card>
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
-export default Comp;
+export default ScheduleCard;
