@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Input, View, XStack } from "tamagui";
 
 const ReserveMenuScreen = () => {
-  const [modalVisible, setModalVisible] = useState(false);
   return (
     <View bg="#f3f3f3" flex={1}>
       <XStack gap="$2.5" bg="$gray5" p="$2.5" m="$3">
