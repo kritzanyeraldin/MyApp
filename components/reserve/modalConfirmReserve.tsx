@@ -1,6 +1,6 @@
 import { Modal } from "react-native";
 import { Button, Image, Text, View } from "tamagui";
-import image from "@/assets/images";
+// import image from "@/assets/images";
 
 type Props = {
   open: boolean;
@@ -31,11 +31,11 @@ const ModalConfirmReserve = ({ open, close }: Props) => {
           maxWidth="80%"
           maxHeight="30%"
         >
-          <Image
+          {/* <Image
             source={{
-              uri: image,
+              uri: "https://picsum.photos/200/300",
             }}
-          />
+          /> */}
         </View>
       </View>
     </Modal>

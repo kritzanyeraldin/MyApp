@@ -48,14 +48,14 @@ export default function ForYouScreen() {
             return (
               <Fragment key={menuName.id}>
                 <XStack bg="red" justifyContent="flex-start">
-                  <Image
+                  {/* <Image
                     style={{ width: "30%", height: "100%" }}
                     source={{
                       uri: menuName.image,
                       // width: 120,
                       // height: 150,
                     }}
-                  />
+                  /> */}
                   <Card bg="yellowgreen" width="70%" br="$0">
                     <CardHeader>
                       <H3>{menuName.title}</H3>

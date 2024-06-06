@@ -1,15 +1,5 @@
 import { Icon } from "@/components/common";
-import {
-  Button,
-  Card,
-  H2,
-  Image,
-  ScrollView,
-  Switch,
-  Text,
-  View,
-  XStack,
-} from "tamagui";
+import { Button, Card, ScrollView, Switch, Text, View, XStack } from "tamagui";
 
 const MyReservationsFill = () => {
   return (
